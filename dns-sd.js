@@ -13,16 +13,15 @@ var once = function(callable) {
 };
 
 var printRow = function(service, event) {
+  once(printInvocation);
   console.log([new Date().toTimeString(),event,service.flags,service.addresses ? service.addresses[0] : "\t",service.name].join("\t"));
 };
 
 browser.on('serviceUp', function(service) {
-  once(printInvocation);
   printRow(service, "Up");
 });
 
 browser.on('serviceDown', function(service) {
-  once(printInvocation);
   printRow(service, "Down");
 });
 
